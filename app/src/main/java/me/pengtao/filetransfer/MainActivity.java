@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements Animator.Animator
         setContentView(R.layout.activity_main);
         mUnbinder = ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
-
+        
         mToolbar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.delete_all:
@@ -122,10 +122,13 @@ public class MainActivity extends AppCompatActivity implements Animator.Animator
                     }
                     break;
                 case R.id.add_files:
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    /**
+                     * 我修改了这里！！解决了在Nubia手机上无法打开文件浏览器的问题。
+                     */
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                     intent.setType("*/*");
-                    startActivityForResult(intent, FILE_FETCH_CODE);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    startActivityForResult(intent,FILE_FETCH_CODE);
                     break;
                 default:
                     break;
