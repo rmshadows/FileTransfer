@@ -1,3 +1,35 @@
+ 
+ ## FORKED FROM CPPAlien的文件传输助手(FileTransfer) [原项目地址](https://github.com/CPPAlien/FileTransfer)
+ 
+ 
+ ### 修改:
+  - 文件路径:FileTransfer/app/src/main/java/me/pengtao/filetransfer/MainActivity.java 
+  
+  - 修改内容:Line 125处,重写的protected void onCreate(Bundle savedInstanceState)方法中的mToolbar.setOnMenuItemClickListener:
+    
+    *原代码：
+            
+                Intent intent = new Intent();
+    
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                    
+                intent.setType("*/*");
+                    
+                startActivityForResult(intent, FILE_FETCH_CODE);
+    
+    *修改为： 
+    
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+
+                intent.setType("*/*");
+
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    
+                startActivityForResult(intent,FILE_FETCH_CODE);
+  
+  - 解决问题:解决了‘文件传输助手’在努比亚手机上无法打开文件浏览器上传文件的问题，原默认打开手机通讯录，修改后可以选择打开方式。
+
+
 # FileTransfer
 ![](https://github.com/CPPAlien/FileTransfer/raw/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
